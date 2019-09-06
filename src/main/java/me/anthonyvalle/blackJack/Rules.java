@@ -5,10 +5,7 @@ import java.util.Scanner;
 
 public class Rules {
 
-    private Player player;
-
-
-    //Dealer Rules Methods
+    //Helper Functions
 
     public boolean checkValue(Player player){
         /*
@@ -38,7 +35,6 @@ public class Rules {
 
         return play;
     }
-
 
 
     public boolean aceCard(Player dealer){

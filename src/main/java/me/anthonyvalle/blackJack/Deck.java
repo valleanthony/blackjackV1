@@ -9,21 +9,13 @@ import java.util.Random;
 public class Deck {
     // All cards are initially stored in an ArrayList. Upon being shuffled they are moved to a stack for the dealer to deal
 
-    private Cards cards;
+
     private ArrayList<Cards> deck = new ArrayList<Cards>();
 
 
-    public Cards getCards() {
-        return cards;
-    }
-
-    public void setCards(Cards cards) {
-        this.cards = cards;
-    }
-
     public Deck() {
-
     }
+
 
     //Methods
 
@@ -100,8 +92,6 @@ public class Deck {
         player.setCurrentHandValue(val+pcv);
         deck.remove(0);
     }
-
-
 
 
     public void sizeOfDeck(){
