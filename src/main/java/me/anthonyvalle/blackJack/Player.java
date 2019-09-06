@@ -8,7 +8,15 @@ public class Player {
     private String name;
     private int currentHandValue;
     private ArrayList<Cards> currentHand;
+    private boolean dealer;
 
+    public boolean isDealer() {
+        return dealer;
+    }
+
+    public void setDealer(boolean dealer) {
+        this.dealer = dealer;
+    }
 
     public int getCurrentHandValue() {
         return currentHandValue;

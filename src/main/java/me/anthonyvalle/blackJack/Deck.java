@@ -81,7 +81,7 @@ public class Deck {
             seed = ran.nextInt(bound); // lets the computer generate a random number
             currentHand.add(deck.get(seed)); //sets a card one by one in the new ArrayList
             deck.remove(seed);
-            System.out.println(bound);
+            //System.out.println(bound);
         }
         player.setCurrentHand(currentHand); //Sets the new ArrayList in the Player as a param. Player now has two cards
         int total=0;
@@ -94,25 +94,22 @@ public class Deck {
     }
 
     public void hitMe(Player player){
-        System.out.println("Current size of deck: ");
-        System.out.println(deck.size()-1);
-        Random ran = new Random();
-        System.out.println("Ran num"+ran);
-        int seed = 0;
-        int bound = deck.size()-1;
-        seed = ran.nextInt(bound);
-        player.getCurrentHand().add(deck.get(seed)); //adds card to players arraylist
-        deck.remove(seed);
-
-
-
-
+        player.getCurrentHand().add(deck.get(0)); //adds card to players arraylist
+        Cards card = new Cards();
+        card = deck.get(0);
+        int val = card.getValue();
+        int pcv = player.getCurrentHandValue();
+        player.setCurrentHandValue(val+pcv);
+        deck.remove(0);
     }
 
 
 
 
-
+    public void sizeOfDeck(){
+        int holder = deck.size()-1;
+        System.out.println(" Current Deck size === " + holder );
+    }
 
 
 
