@@ -14,6 +14,7 @@ public class Rules {
         /*
         The first section helps the player set the value of any Ace cards they might have.
          */
+        int pHolder =player.getCurrentHandValue();
         Scanner input = new Scanner(System.in);
         boolean play = true;
         ArrayList<Cards> temp = new ArrayList<Cards>();
@@ -23,6 +24,8 @@ public class Rules {
                 System.out.println("What value do you want for your Ace");
                 int ace = input.nextInt();
                 c.setValue(ace);
+                player.setCurrentHandValue(pHolder+ace);
+
 
             }
             else{}
@@ -60,7 +63,10 @@ public class Rules {
 
             }
         }
-
+        if(dealer.getCurrentHandValue()==21){
+            play=false;
+            return play;
+        }
         return play;
 
     }

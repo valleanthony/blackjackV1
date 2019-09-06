@@ -13,7 +13,6 @@ public class Deck {
     private ArrayList<Cards> deck = new ArrayList<Cards>();
 
 
-
     public Cards getCards() {
         return cards;
     }
@@ -23,7 +22,6 @@ public class Deck {
     }
 
     public Deck() {
-
 
     }
 

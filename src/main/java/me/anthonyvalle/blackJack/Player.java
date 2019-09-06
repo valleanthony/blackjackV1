@@ -37,7 +37,7 @@ public class Player {
 
     public ArrayList<Cards> getCurrentHand() {
         for (Cards c:currentHand){
-            System.out.println(c.toString());
+            //System.out.println(c.toString());
         }
 
         //System.out.println(currentHandValue);
