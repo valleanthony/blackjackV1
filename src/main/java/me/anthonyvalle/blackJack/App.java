@@ -27,13 +27,13 @@ public class App {
         deck.makeDeck();//Outside of the loop so no new deck is made
         deck.shuffleDeck(); // Shuffles the cards
         deck.dealTwoCards(user); //User gets two cards
-        deck.dealTwoCards(dealer); //TODO:Dealer gets two cards
+        deck.dealTwoCards(dealer); //Dealer gets two cards
 
         while(play==true){
-            play =rules.aceCard(dealer); //Assigns values to Ace Card for dealer
-            System.out.println(user.getCurrentHand().toString()); //Prints the Users current hand
-            rules.checkValue(user); //User checks cards first as per rule
-            play=rules.winDrawEval(user,dealer,play);//checks 2if the player is over 21
+            rules.aceCard(user); //User checks cards first as per rule
+            rules.aceCard(dealer); //Assigns values to Ace Card for dealer
+            rules.showUsersHand(user);//Prints the Users current hand
+            play=rules.winDrawEval(user,dealer,play);//checks if the player or dealer is over 21
             if (play==false){
                 break;
             }
@@ -42,6 +42,7 @@ public class App {
                 rules.aceCard(dealer); //checks if the dealer drew a Ace and determines value based on cards that the dealer holds
                 if (dealer.getCurrentHandValue()>21){ //Checks if the dealer went bust by drawing additional card
                     System.out.println("Player wins Dealer went bust");
+                    rules.printScore(user,dealer);
                     break; //Ends the loop
                 }
             }
@@ -50,7 +51,8 @@ public class App {
 
             if (response.equalsIgnoreCase("Y")){ //if user enters 'Y' a card is drawn from the playing deck and handed to player
                 deck.hitMe(user); //adds card to the users hand
-                rules.checkValue(user); //checks if the card is a Ace and asks the user to input value for the Ace
+                rules.aceCard(user); //checks if the card is a Ace and asks the user to input value for the Ace
+                rules.showUsersHand(user);
                 play=rules.winDrawEval(user,dealer,play); //Checks if the user is over 21 and sends back a boolean
                 if (play==false){
                     break;

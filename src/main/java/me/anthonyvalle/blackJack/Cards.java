@@ -44,8 +44,9 @@ public class Cards {
     public String toString() {
         return "Card:{" +
                 "suit=" + suit +
-                ", card value=" + value +
                 ", Character=" + rank +
+                ", Card Value=" + value +
+                ", Ace? =" + isAce +
                 '}';
     }
 }
