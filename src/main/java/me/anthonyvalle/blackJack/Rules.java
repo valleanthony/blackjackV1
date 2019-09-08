@@ -7,40 +7,29 @@ public class Rules {
 
     //Helper Functions
 
-    public boolean checkValue(Player player){
+    public void checkValue(Player player){
         /*
         The first section helps the player set the value of any Ace cards they might have.
          */
         int pHolder =player.getCurrentHandValue();
         Scanner input = new Scanner(System.in);
-        boolean play = true;
         ArrayList<Cards> temp = new ArrayList<Cards>();
         temp=player.getCurrentHand();
         for (Cards c: temp){
             if (c.isAce()&&c.getValue()==0){//Confirms that card is a Ace and user has not already assigned a value
                 System.out.println("What value do you want for your Ace");
-                int ace = input.nextInt();
+                int ace = input.nextInt();//todo: limit input options.
                 c.setValue(ace);
                 player.setCurrentHandValue(pHolder+ace);
-
-
             }
-            else{}
-        }
-        //Checks to see if player lost
-        if (player.getCurrentHandValue()>21){
-            System.out.println("You Lost");
-            return play=false;
-        }
 
-        return play;
+        }
     }
-
 
     public boolean aceCard(Player dealer){
         boolean play = true;
         int holder =dealer.getCurrentHandValue();
-        System.out.println("ACE METHOD::: CURRENT VALUE OF DEALER" + holder);
+       // System.out.println("ACE METHOD::: CURRENT VALUE OF DEALER" + holder);
         if(dealer.isDealer()){ //Making sure this only used for the dealer
             ArrayList<Cards> temp = new ArrayList<Cards>();
             temp=dealer.getCurrentHand(); // holding current hand
@@ -59,15 +48,61 @@ public class Rules {
 
             }
         }
-        if(dealer.getCurrentHandValue()==21){
-            play=false;
-            return play;
-        }
         return play;
 
     }
 
 
+    //Call this function when dealing an additional card
+    public boolean winDrawEval(Player user, Player dealer, boolean play){ //Should be called after first two cards are dealt
+        if (dealer.getCurrentHandValue()==21 && user.getCurrentHandValue()== 21){ //Eval if both user and dealer are at 21
+            System.out.println("It is a Tie");
+            play=false;
+            return play;
+        }
+        else if (dealer.getCurrentHandValue()>21 && user.getCurrentHandValue()>21){
+            System.out.println("Dealer Wins");
+            play=false;
+            return play;
+        }
+        else if(user.getCurrentHandValue()>21){ //Eval if user over 21
+            System.out.println("Dealer Wins");
+            play=false;
+            return play;
+        }
+        else if(user.getCurrentHandValue()==21){
+            System.out.println("Player wins! Player has 21");
+            play = false;
+            return play;
+        }
+        else if (dealer.getCurrentHandValue()==21){
+            System.out.println("Dealer wins! Dealer has 21");
+            play = false;
+            return play;
+        }
+
+        return play;
+    }
+
+    //Function called to determine a winner when the player decides to stand.
+    public boolean playerStandsWinnerFunctions(Player dealer, Player user, boolean play){
+        if (dealer.getCurrentHandValue()<=21 && user.getCurrentHandValue()<= dealer.getCurrentHandValue()){
+            System.out.println("Dealer Wins");
+            play=false;
+            return play;
+        }
+        else if (user.getCurrentHandValue()<=21 && dealer.getCurrentHandValue()<= user.getCurrentHandValue()){
+            System.out.println("Players Wins");
+            play=false;
+            return play;
+        }
+        else if(dealer.getCurrentHandValue()==user.getCurrentHandValue()){
+            System.out.println("It is a Tie");
+            play=false;
+            return play;
+        }
+        return play;
+    }
 
 
 

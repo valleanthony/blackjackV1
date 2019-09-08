@@ -1,12 +1,12 @@
 package me.anthonyvalle.blackJack;
 
 
+import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
     public static void main( String[] args ){
-
         Player user = new Player(); // the Human Playing the game
         Player dealer = new Player(); // The Computer
         Deck deck = new Deck(); // a deck of cards object
@@ -27,69 +27,38 @@ public class App {
         deck.makeDeck();//Outside of the loop so no new deck is made
         deck.shuffleDeck(); // Shuffles the cards
         deck.dealTwoCards(user); //User gets two cards
-        deck.dealTwoCards(dealer); //Dealer gets two cards
+        deck.dealTwoCards(dealer); //TODO:Dealer gets two cards
 
-        while(play){
-            rules.aceCard(dealer); //Assigns values to Ace Cards, and checks if Dealer is a winner with an ace
-            System.out.println(user.getCurrentHand().toString());
+        while(play==true){
+            play =rules.aceCard(dealer); //Assigns values to Ace Card for dealer
+            System.out.println(user.getCurrentHand().toString()); //Prints the Users current hand
             rules.checkValue(user); //User checks cards first as per rule
+            play=rules.winDrawEval(user,dealer,play);//checks 2if the player is over 21
+            if (play==false){
+                break;
+            }
             if (dealer.getCurrentHandValue()<17){ //if the value is below 17 dealer draws additional card.
                 deck.hitMe(dealer); //Card is added to the dealers ArrayList
                 rules.aceCard(dealer); //checks if the dealer drew a Ace and determines value based on cards that the dealer holds
                 if (dealer.getCurrentHandValue()>21){ //Checks if the dealer went bust by drawing additional card
                     System.out.println("Player wins Dealer went bust");
-                    play=false; //Ends the loop
+                    break; //Ends the loop
                 }
             }
-            System.out.println("Would you like to draw another card or stand ( type the letter Y = Draw / N = Stand)?");
+            System.out.println("Would you like to draw another card or stand ( type the letter Y = Draw / any other character to = Stand)?");
             response = keyboard.nextLine();
 
             if (response.equalsIgnoreCase("Y")){ //if user enters 'Y' a card is drawn from the playing deck and handed to player
                 deck.hitMe(user); //adds card to the users hand
                 rules.checkValue(user); //checks if the card is a Ace and asks the user to input value for the Ace
-            }else{
-                if (dealer.getCurrentHandValue()<=21 && user.getCurrentHandValue()<= dealer.getCurrentHandValue()){
-                    System.out.println("Dealer Wins");
-                    play=false;
+                play=rules.winDrawEval(user,dealer,play); //Checks if the user is over 21 and sends back a boolean
+                if (play==false){
+                    break;
                 }
-                else if (user.getCurrentHandValue()<=21 && dealer.getCurrentHandValue()<= user.getCurrentHandValue()){
-                    System.out.println("Players Wins");
-                    play=false;
-                }
-
-                else if(dealer.getCurrentHandValue()>21){
-                    System.out.println("Player Wins");
-                    play=false;
-                }
-                else if (dealer.getCurrentHandValue()==21 && user.getCurrentHandValue()== 21){
-                    System.out.println("Dealer Wins");
-                    play=false;
-                }
-
-
             }
-
-
-
-
-
-
-
-
-
+            else{
+                play=rules.playerStandsWinnerFunctions(dealer,user,play);//Evaluates Current scenario to determine a winner.
+            }
         }
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
 }

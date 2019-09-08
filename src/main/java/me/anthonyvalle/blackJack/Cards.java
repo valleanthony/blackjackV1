@@ -42,11 +42,10 @@ public class Cards {
 
     @Override
     public String toString() {
-        return "Cards{" +
+        return "Card:{" +
                 "suit=" + suit +
-                ", value=" + value +
-                ", rank=" + rank +
-                ", isAce=" + isAce +
+                ", card value=" + value +
+                ", Character=" + rank +
                 '}';
     }
 }
