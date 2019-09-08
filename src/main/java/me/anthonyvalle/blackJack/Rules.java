@@ -67,13 +67,13 @@ public class Rules {
 
     //Function called to determine a winner when the player decides to stand.
     public boolean playerStandsWinnerFunctions(Player dealer, Player user, boolean play){
-        if (dealer.getCurrentHandValue()<=21 && user.getCurrentHandValue()<= dealer.getCurrentHandValue()){
+        if (dealer.getCurrentHandValue()<=21 && user.getCurrentHandValue()< dealer.getCurrentHandValue()){
             System.out.println("Dealer Wins");
             printScore(user, dealer);
             play=false;
             return play;
         }
-        else if (user.getCurrentHandValue()<=21 && dealer.getCurrentHandValue()<= user.getCurrentHandValue()){
+        else if (user.getCurrentHandValue()<=21 && dealer.getCurrentHandValue()< user.getCurrentHandValue()){
             System.out.println("Players Wins");
             printScore(user, dealer);
             play=false;
