@@ -11,7 +11,7 @@ public enum Rank {
     Nine,
     Ten,
     Jack,
-    Queens,
+    Queen,
     King,
     Ace,
 }

@@ -105,8 +105,8 @@ public class Rules {
         for (Cards c: holder){
             System.out.println("Card Number: " + start);
             System.out.println("----------------------------"+"\n");
-            System.out.println("Suit : "+c.getSuit() +" of"+"\n");
-            System.out.println("Rank : "+c.getRank() +"\n");
+            System.out.println("Rank : "+c.getRank() +" of"+"\n");
+            System.out.println("Suit : "+c.getSuit()+"\n");
             System.out.println("Value : "+c.getValue() +"\n");
             System.out.println("----------------------------"+"\n");
             start++;
